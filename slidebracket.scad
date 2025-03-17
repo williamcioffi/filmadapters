@@ -25,7 +25,7 @@ cutoutz = 15;
 slidexy = 52;
 
 // radius for the curved corners 
-curveradius = 1.5;
+curveradius = 4;
 
 // define modules
 
