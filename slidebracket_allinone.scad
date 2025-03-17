@@ -48,7 +48,7 @@ module bottom() {
         // base plate
         rounded_rect_prism(outerx, outery, outerz, curveradius);
         // window for slide light
-        cube([outer_slidexy - 2*inner_slide_lip, outer_slidexy - 2*    inner_slide_lip, cutoutz], center = true);
+        cube([outer_slidexy - 2*inner_slide_lip, outer_slidexy - 2*inner_slide_lip, cutoutz], center = true);
     }
 }
 
