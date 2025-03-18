@@ -1,5 +1,12 @@
 // increase fragment size for prettier cylinders
-$fn = 25;
+// $fn = 25;
+
+// better resolution
+$fa = 1;
+$fs = 0.4;
+
+// overlap
+smalloverlap = 2;
 
 // outside shape
 outerx = 60.8;
@@ -46,7 +53,7 @@ module rounded_rect_prism(x, y, z, r1) {
 module bottom() {
     difference() {
         // base plate
-        rounded_rect_prism(outerx, outery, outerz, curveradius);
+        rounded_rect_prism(outerx, outery, outerz + smalloverlap, curveradius);
         // window for slide light
         cube([outer_slidexy - 2*inner_slide_lip, outer_slidexy - 2*inner_slide_lip, cutoutz], center = true);
     }
@@ -54,7 +61,7 @@ module bottom() {
 
 module connecting_lip() {
     difference() {
-        rounded_rect_prism(innerx, innery, innerz, curveradius);
+        rounded_rect_prism(innerx, innery, innerz + smalloverlap, curveradius);
         rounded_rect_prism(innerwindowx, innerwindowy, cutoutz, curveradius);
     }
 }
@@ -64,7 +71,7 @@ module top() {
         // base plate
         union() {
             rounded_rect_prism(outerx, outery, outerz, curveradius);
-            translate([0, 0, innerz]) connecting_lip();
+            translate([0, 0, innerz - smalloverlap/2]) connecting_lip();
         }
         // cut out for fingies
         rounded_rect_prism(innerwindowx, innerwindowy, cutoutz, curveradius);
@@ -74,5 +81,6 @@ module top() {
 }
 
 // build it
-translate([0, 0, outerz]) top();
-bottom();
+
+translate([0, 0, outerz - smalloverlap]) top();
+translate([0, 0, smalloverlap/2]) bottom();
