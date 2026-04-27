@@ -1,17 +1,21 @@
-// increase fragment size for prettier cylinders
-// $fn = 25;
+// possible case dimensions
+case_dims_35mk2 = [60.8, 89.4];
+case_dims_3x4mk2 = [106.5, 133.2];
+
+// select desired case dimensions
+case_dims = case_dims_35mk2; 
 
 // better resolution
 $fa = 1;
 $fs = 0.4;
 
+// outside shape
+outerx = case_dims[0];
+outery = case_dims[1];
+outerz = 3.8;
+
 // overlap
 smalloverlap = 2;
-
-// outside shape
-outerx = 60.8;
-outery = 89.4;
-outerz = 3.8;
 
 // raised edge (fits into piece above)
 innerx = 42.6;
