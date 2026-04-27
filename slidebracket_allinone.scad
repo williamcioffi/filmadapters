@@ -53,7 +53,7 @@ module rounded_rect_prism(x, y, z, r1) {
 module bottom() {
     difference() {
         // base plate
-        rounded_rect_prism(outerx, outery, outerz + smalloverlap, curveradius);
+        rounded_rect_prism(outerx, outery, outerz, curveradius);
         // window for slide light
         cube([outer_slidexy - 2*inner_slide_lip, outer_slidexy - 2*inner_slide_lip, cutoutz], center = true);
     }
@@ -81,6 +81,10 @@ module top() {
 }
 
 // build it
+        
+     
 
-translate([0, 0, outerz - smalloverlap]) top();
-translate([0, 0, smalloverlap/2]) bottom();
+union() {
+    translate([0, 0, outerz*2 - smalloverlap/4]) top();
+    translate([0, 0, outerz]) bottom();
+}
