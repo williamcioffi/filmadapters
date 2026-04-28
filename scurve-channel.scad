@@ -5,10 +5,12 @@
 
 // variables
 fs = 1.2;  // roughly the size of straight parts of curves
-w1 = 0.2;   // cookie cutter, thicker side
-w2 = 0.2;   // cookie cutter, thinner side
-h = 2.5 + 0.2;     // cookie cutter height
-
+w1 = 1;   
+w2 = 1;   
+smalloverlap = 0.2;
+channeldepth = 2.5;
+h = channeldepth + smalloverlap;     // height
+flatlen = 65; // flat stretch on the s-curve
 
 // functions and modules
 function fn(a, b) = round(sqrt(pow(a[0]-b[0],2) + pow(a[1]-b[1], 2))/fs);
@@ -35,19 +37,34 @@ function b_pts(pts, n, idx) =       // gets called by b_curve() ...
             + pts[1] * (1-n*idx);
 
 module scurvechannel() {
+    len1 = 10;
+    len2 = 30;
+    len3 = flatlen; // flat stretch
+    len4 = 22;
+    lensmooth = 5;
+    
+    height1 = 8.5;
+    height2 = 1;
+    height3 = 12;
+    heightsmooth1 = 0.5;
+    heightsmooth2 = 2;
+    
+    
     p1 = [0, 0];
-    p2 = [0, 8.5];
-    p2b = [10, 8];
-    p2c = [25, 2];
-    p3 = [30, 0];
-    p3b = [35, 0];
+    p2 = [0, height1];
+    p2b = [len1, height1 - heightsmooth1];
+    p2c = [len2 - lensmooth, heightsmooth2];
+    p3 = [len2, 0];
+    p3b = [len2 + lensmooth, 0];
 
-    p3c = [35+45, 0];
-    p4 = [35+50, 0];
-    p4b = [35+50+5, 1];
-    p5 = [35+50+22, 12];
+    p3c = [len2 + len3, 0];
+    p4 = [len2 + len3 + lensmooth, 0];
+    p4b = [len2 + len3 + lensmooth*2, height2];
+    p5 = [len2 + len3 + len4 + lensmooth, height3];
 
     b_curve([p1, p2, p2b, p2c, p3, p3b]);
     b_curve([p3b, p3c]);
     b_curve([p3c, p4, p4b, p5]);
+    
+    echo(p5);
 }

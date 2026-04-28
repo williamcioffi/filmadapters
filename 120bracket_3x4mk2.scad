@@ -48,9 +48,37 @@ innerfilmwidth = 62 - 2.5*2;
 length = 125;
 z2 = 5;
 
+scurechannelbracketheight = 20;
+
+scurvelen = 122;
+lenbuff = 2;
+
+// left plate with channel
 difference() {
-translate([(35+50+22)/2 + 2 - 2, 7.5 - 2.5, 0]) cube([35+50+22 - 2,15, z2], center = true);
+    translate([lenbuff, 0, 0]) cube([scurvelen - lenbuff, scurechannelbracketheight, z2]);
                       
-scurvechannel();
-    
+    translate([0, 2, z2/2]) scurvechannel();
 }
+
+// right plate with channel
+difference() {
+    translate([lenbuff, 0, outerfilmwidth - channeldepth + z2/2]) cube([scurvelen - lenbuff, scurechannelbracketheight, z2]);
+    
+    translate([0, 2, outerfilmwidth - channeldepth - smalloverlap + z2/2]) scurvechannel();
+}
+
+//structure
+
+difference() {
+    //top
+color([1, 0, 0, .25])    translate([lenbuff, scurechannelbracketheight - 5, 0]) cube([scurvelen - lenbuff, 5, outerfilmwidth + z2/2]);
+
+//    //make a window
+    translate([flatlen + lenbuff + 5 - flatlen/2, scurechannelbracketheight - 5 - smalloverlap, z2]) cube([flatlen, lenbuff + 5 + smalloverlap*2, innerfilmwidth]);
+}
+
+translate([lenbuff, 0, 0]) cube([15, 5, outerfilmwidth + z2/2]);
+
+translate([scurvelen - 12, 0, 0]) cube([12, 5, outerfilmwidth + z2/2]);
+
+
