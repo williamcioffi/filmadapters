@@ -1,3 +1,6 @@
+// get scurve code
+include <scurve-channel.scad>
+
 // possible case dimensions
 case_dims_3x4mk2 = [106.5, 133.2];
 
@@ -45,5 +48,9 @@ innerfilmwidth = 62 - 2.5*2;
 length = 125;
 z2 = 5;
 
-cube([outerfilmwidth, length, z2], center = true);
-                                                                                 
+difference() {
+translate([(35+50+22)/2 + 2 - 2, 7.5 - 2.5, 0]) cube([35+50+22 - 2,15, z2], center = true);
+                      
+scurvechannel();
+    
+}
